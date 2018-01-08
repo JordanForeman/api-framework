@@ -1,5 +1,5 @@
 {
-  "name": "api-framework",
+  "name": "@jordanforeman/api-framework",
   "version": "1.0.0",
   "description": "Everything you need to start creating a NodeJS based API Server",
   "main": "index.js",
@@ -11,6 +11,10 @@
     "/lib",
     "/src"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JordanForeman/api-framework"
+  },
   "author": "Better Than Great <thejordanforeman@gmail.com>",
   "license": "ISC",
   "dependencies": {
