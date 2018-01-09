@@ -31,16 +31,19 @@ jobs:
           paths:
             - "*"
 
-    deploy:
-        working_directory: ~/project
-        docker:
-          - image: circleci/node:6.10-browsers
-        steps:
-          - restore_cache:
-              key: api-framework-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
-          - run:
-              name: Publish to NPM
-              command: npm publish
+  deploy:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:6.10-browsers
+    steps:
+      - run:
+          name: Configure NPM
+          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+      - restore_cache:
+          key: api-framework-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Publish to NPM
+          command: npm publish
 
 workflows:
   version: 2
