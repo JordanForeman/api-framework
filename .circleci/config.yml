@@ -32,7 +32,7 @@ jobs:
             - "*"
 
   deploy:
-    working_directory: ~/project
+    working_directory: ~/repo
     docker:
       - image: circleci/node:6.10-browsers
     steps:
