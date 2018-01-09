@@ -8,6 +8,9 @@ jobs:
             - NODE_ENV="prod"
     steps:
       - checkout
+      - run:
+          name: Configure NPM
+          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
