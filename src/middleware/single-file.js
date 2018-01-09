@@ -1,3 +1,3 @@
 import multer from 'multer';
 
-export default (filename) => multer().single(filename);
+export default filename => multer().single(filename);

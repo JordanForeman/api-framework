@@ -1,5 +1,5 @@
 import { JsonWebTokenError } from 'jsonwebtoken';
-import * as dataModel from 'data-modeler';
+import * as dataModel from '@jordanforeman/data-modeler';
 import {
     NOT_FOUND,
     GENERIC_SERVER_ERROR,

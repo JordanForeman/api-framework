@@ -8,7 +8,7 @@ import http from 'http';
 import logger from './util/logger';
 import route from './util/router';
 
-const onStart = (port) => () => {
+const onStart = port => () => {
     logger.info(`application environment: ${process.env.NODE_ENV}`);
     logger.info(`server running on port ${port}`);
 };

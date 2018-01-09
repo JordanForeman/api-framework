@@ -6,4 +6,4 @@ const strategies = {
     jwt
 };
 
-export default (key) => strategies[key] || identity;
+export default key => strategies[key] || identity;

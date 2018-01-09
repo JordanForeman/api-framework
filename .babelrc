@@ -5,7 +5,15 @@
   ],
   "plugins": [
     ["transform-runtime", {
+      "polyfill": true,
       "regenerator": true
     }]
-  ]
+  ],
+  "env": {
+    "coverage": {
+      "plugins": [
+        "istanbul"
+      ]
+    }
+  }
 }

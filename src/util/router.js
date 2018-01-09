@@ -2,7 +2,7 @@ import getStrategy from '../authentication';
 import restWrapper from './rest-wrapper';
 import { identity } from '../middleware';
 
-export default (server) => ({ method, path, config }) => {
+export default server => ({ method, path, config }) => {
     const {
         auth,
         handler,
