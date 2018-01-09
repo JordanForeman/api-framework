@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  verify:
     working_directory: ~/repo
     docker:
       - image: circleci/node:7.10
@@ -11,48 +11,37 @@ jobs:
       - run:
           name: Configure NPM
           command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
-      - run: npm install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
       - run:
-          name: Build
-          command: npm run build
+          name: Install Dependencies
+          command: npm install
       - run:
           name: Verify
           command: npm run verify
-      - save_cache:
-          key: api-framework-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - "*"
 
   deploy:
     working_directory: ~/repo
     docker:
       - image: circleci/node:6.10-browsers
     steps:
+      - checkout
       - run:
           name: Configure NPM
           command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
-      - restore_cache:
-          key: api-framework-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Build
+          command: npm run build
       - run:
           name: Publish to NPM
           command: npm publish
 
 workflows:
   version: 2
-  build-and-deploy:
+  verify-and-deploy:
     jobs:
-      - build
+      - verify
       - deploy:
           requires:
-            - build
+            - verify
           filters:
             branches:
               only: master
