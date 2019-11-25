@@ -1,6 +1,7 @@
 import getStrategy from '../authentication';
 import restWrapper from './rest-wrapper';
-import { identity } from '../middleware';
+
+const identity = (request, response, next) => next();
 
 export default server => ({ method, path, config }) => {
     const {

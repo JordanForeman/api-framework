@@ -1,4 +1,4 @@
-# api-framework
+# `@jordanforeman/api-framework`
 
 Everything you need to start creating a NodeJS based API Server. Handles common tasks such as:
 
@@ -9,13 +9,13 @@ Everything you need to start creating a NodeJS based API Server. Handles common 
 ## Installation
 
 ```bash
-$ npm i --save api-framework
+$ npm i --save @jordanforeman/api-framework
 ```
 
 ## Usage
 
 ```js
-import { start } from 'api-framework';
+import { start } from '@jordanforeman/api-framework';
 import controllers from './controllers';
 
 const config = {
@@ -33,36 +33,29 @@ Property | Description
 ------------- | -------------
 path | The API route/path
 method | the standard HTTP method to use (maps to [Express router methods](https://expressjs.com/en/4x/api.html#router.METHOD))
-config.middleware | `TODO` document this
 config.handler | A single Express method callback with signature `(request, response, next)`
-config.auth | (optional) the key of the authentication strategy to use for this controller
+config.middleware | (optional) the middleware (or middlewares) to use for this controller
+config.auth | (optional) the authentication strategy to use for this controller
 
 ```js
-import { strategies } from 'api-framework';
+import { strategies } from '@jordanforeman/api-framework';
+import { auth as jwtAuth } from '@jordanforeman/jwt-authentication';
 
 export const myController = {
     path: '/',
     method: 'GET',
     config: {
-        auth: strategies.JWT,
+        auth: jwtAuth,
         handler: getRoot
     }
 };
 ```
 
-### Authentication Strategies
+## Authentication Strategies
 
-Authentication strategies are predefined Express middleware that handle authentication requirements for a given API route controller. Simply add: `auth: <strategy>` to your controller's `config`, and `api-framework` will handle the rest.
+Authentication strategies are published separately from this module. The following strategies are implemented to work with this module:
 
-### Available Strategies
-
-Name | Description
-------------- | -------------
-JWT | Reads 'x-access-token' from the request headers and verifies against the app secret defined in `config`. Immediately returns a 403 if token is invalid
-
-### Default Middleware
-
-`TODO:` document this
+* [`@jordanforeman/jwt-authentication`](https://github.com/jordanforeman/authentication-strategies/tree/master/packages/jwt-authentication)
 
 ## Helpful Links
 
