@@ -1,32 +1,11 @@
-import { JsonWebTokenError } from 'jsonwebtoken';
-import * as dataModel from '@jordanforeman/data-modeler';
-import {
-    NOT_FOUND,
-    GENERIC_SERVER_ERROR,
-    UNAUTHORIZED,
-    SUCCESS,
-    UNPROCESSABLE_ENTITY
-} from '../constant/HTTPStatusCodes';
-import BadDataError from '../errors/BadDataError';
-import NotFoundError from '../errors/NotFoundError';
+const GENERIC_SERVER_ERROR = 500;
+const GENERIC_ERROR_MESSAGE = 'An Error Occurred';
 
 export default (error, request, response) => {
-    const { message } = error;
+    const message = error.message || GENERIC_ERROR_MESSAGE;
+    const status = error.statusCode || GENERIC_SERVER_ERROR;
 
-    if (error instanceof dataModel.NotFoundError) {
-        response.status(NOT_FOUND);
-    } else if (error instanceof dataModel.EmptyCollectionError) {
-        response.status(SUCCESS);
-    } else if (error instanceof JsonWebTokenError) {
-        response.status(UNAUTHORIZED);
-    } else if (error instanceof BadDataError) {
-        response.status(UNPROCESSABLE_ENTITY);
-    } else if (error instanceof NotFoundError) {
-        response.status(NOT_FOUND);
-    } else {
-        response.status(GENERIC_SERVER_ERROR);
-    }
-
+    response.status(status);
     response.json({ message });
     response.end();
 };

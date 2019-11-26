@@ -5,19 +5,19 @@ import cors from 'cors';
 import helmet from 'helmet';
 import http from 'http';
 
-import logger from './util/logger';
 import route from './util/router';
 
-const onStart = port => () => {
-    logger.info(`application environment: ${process.env.NODE_ENV}`);
-    logger.info(`server running on port ${port}`);
+const DEFAULT_CONFIG = {
+    port: 8080,
+    onStart: () => null,
+    onError: () => null
 };
 
-const onError = (e) => {
-    logger.error(`Server Error: ${e.message}`);
-};
-
-export default (controllers, config) => {
+export function start(controllers, config) {
+    const mergedConfig = {
+        ...DEFAULT_CONFIG,
+        ...config
+    };
     const app = express();
 
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,8 +30,8 @@ export default (controllers, config) => {
 
     const server = http.createServer(app);
 
-    server.on('listening', onStart(config.port));
-    server.on('error', onError);
+    server.on('listening', mergedConfig.onStart);
+    server.on('error', mergedConfig.onError);
 
-    server.listen(config.port);
-};
+    server.listen(mergedConfig.port);
+}
