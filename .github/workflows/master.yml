@@ -15,7 +15,7 @@ jobs:
         run: npm ci
       - name: Verify
         run: npm run verify
-  deploy:
+  publish:
     runs-on: ubuntu-latest
     needs: verify
     steps:
