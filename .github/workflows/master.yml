@@ -1,0 +1,35 @@
+name: Semantic Release
+on:
+  push:
+    branches:
+      - master
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v1
+      - name: Use Node.js
+        uses: dcodeIO/setup-node-nvm@master
+      - name: Install Node Dependencies
+        run: npm ci
+      - name: Verify
+        run: npm run verify
+  deploy:
+    runs-on: ubuntu-latest
+    needs: verify
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v1
+      - name: Use Node.js
+        uses: dcodeIO/setup-node-nvm@master
+      - name: Install Node Dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          HUSKY_SKIP_HOOKS: 1
+        run: npx semantic-release
