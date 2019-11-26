@@ -13,7 +13,7 @@ const DEFAULT_CONFIG = {
     onError: () => null
 };
 
-export default (controllers, config) => {
+export function start(controllers, config) {
     const mergedConfig = {
         ...DEFAULT_CONFIG,
         ...config
@@ -34,4 +34,4 @@ export default (controllers, config) => {
     server.on('error', mergedConfig.onError);
 
     server.listen(mergedConfig.port);
-};
+}
