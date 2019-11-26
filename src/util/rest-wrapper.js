@@ -1,10 +1,12 @@
 import handleError from './error-handler';
-import { SUCCESS } from '../constant/HTTPStatusCodes';
 
-export default handler => async (request, response, next) => {
+const SUCCESS = 200;
+
+export default (handler) => async (request, response, next) => {
     try {
-        await handler(request, response, next);
+        const data = await handler(request, response, next);
 
+        response.json(data);
         response.status(SUCCESS);
     } catch (error) {
         handleError(error, request, response);

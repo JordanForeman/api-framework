@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src --out-dir lib",
-    "coverage": "cross-env NODE_ENV=coverage nyc --check-coverage --reporter=text npm test",
+    "coverage": "nyc --check-coverage --reporter=text npm test",
     "fixlint": "eslint .js src/ test/ --fix",
     "lint": "eslint --ext .js src/ test/",
-    "test": "mocha",
+    "test": "mocha ./test/unit/**/*.spec.js",
     "verify": "npm run lint && npm run coverage"
   },
   "files": [
@@ -23,30 +23,28 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "config": "^1.29.0",
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "helmet": "^3.9.0",
-    "jsonwebtoken": "^8.1.0",
     "morgan": "^1.9.0",
     "multer": "1.3.0",
-    "ramda": "^0.25.0",
     "winston": "^2.4.0"
   },
   "devDependencies": {
-    "@jordanforeman/babel-config": "0.1.0",
+    "@jordanforeman/babel-config": "0.1.1",
     "@jordanforeman/commitizen-config": "1.2.3",
     "@jordanforeman/commitlint-config": "0.2.2",
     "@jordanforeman/eslint-config": "0.2.4",
+    "@jordanforeman/nyc-config": "0.1.1",
     "@jordanforeman/release-config": "0.2.2",
     "@jordanforeman/renovate-config": "0.2.2",
-    "chai": "^4.0.2",
+    "chai": "4.2.0",
     "chance": "^1.0.10",
     "cross-env": "^5.0.1",
     "husky": "^3.1.0",
-    "mocha": "^3.4.2",
+    "mocha": "6.2.2",
     "nyc": "^10.3.2",
     "proxyquire": "^1.8.0",
-    "sinon": "^2.3.2"
+    "sinon": "7.5.0"
   }
 }
