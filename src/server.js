@@ -7,7 +7,17 @@ import http from 'http';
 
 import route from './util/router';
 
+const DEFAULT_CONFIG = {
+    port: 8080,
+    onStart: () => null,
+    onError: () => null
+};
+
 export default (controllers, config) => {
+    const mergedConfig = {
+        ...DEFAULT_CONFIG,
+        ...config
+    };
     const app = express();
 
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,8 +30,8 @@ export default (controllers, config) => {
 
     const server = http.createServer(app);
 
-    server.on('listening', config.onStart);
-    server.on('error', config.onError);
+    server.on('listening', mergedConfig.onStart);
+    server.on('error', mergedConfig.onError);
 
-    server.listen(config.port);
+    server.listen(mergedConfig.port);
 };
