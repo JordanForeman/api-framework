@@ -9,6 +9,7 @@ import route from './util/router';
 
 const DEFAULT_CONFIG = {
     port: 8080,
+    plugins: [],
     onStart: () => null,
     onError: () => null
 };
@@ -25,6 +26,10 @@ export function start(controllers, config) {
     app.use(morgan('dev'));
     app.use(cors());
     app.use(helmet());
+
+    mergedConfig.plugins.forEach((plugin) => {
+        app.use(plugin);
+    });
 
     controllers.forEach(route(app));
 

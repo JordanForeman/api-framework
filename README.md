@@ -33,6 +33,7 @@ start(controllers, config);
 |--------|-------------|---------|
 | `port` | The port to run the server on | `8080` |
 | `onStart` | (optional) a function to run when the server starts | **n/a** |
+| `plugins` | (optional) an array of `express` plugins to include (eg. `express-session`) |  **n/a** |
 | `onError` | (optional) a function to run when the server encounters an error (takes a single parameter, which is the error) | **n/a** |
 
 ## Controller Syntax
