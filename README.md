@@ -17,15 +17,18 @@ $ npm i --save @jordanforeman/api-framework
 ## Usage
 
 ```js
-import { start } from '@jordanforeman/api-framework';
+import { setup, start } from '@jordanforeman/api-framework';
 import controllers from './controllers';
 
 const config = {
     port: 8080
 };
 
-start(controllers, config);
+setup(controllers, config);
+start();
 ```
+
+* as of `v3.0.0`, `setup` and `start` are two separate lifecycle methods. This enables you to define any special logic that is required to take place between configuration (ie. `server.use`) and start (ie. `server.listen`).
 
 ## Configuration Options
 

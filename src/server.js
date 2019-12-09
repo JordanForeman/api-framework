@@ -14,8 +14,11 @@ const DEFAULT_CONFIG = {
     onError: () => null
 };
 
-export function start(controllers, config) {
-    const mergedConfig = {
+let _server, // eslint-disable-line no-underscore-dangle
+    _config; // eslint-disable-line no-underscore-dangle
+
+export function setup(controllers, config) {
+    _config = {
         ...DEFAULT_CONFIG,
         ...config
     };
@@ -27,16 +30,18 @@ export function start(controllers, config) {
     app.use(cors());
     app.use(helmet());
 
-    mergedConfig.plugins.forEach((plugin) => {
+    _config.plugins.forEach((plugin) => {
         app.use(plugin);
     });
 
     controllers.forEach(route(app));
 
-    const server = http.createServer(app);
+    _server = http.createServer(app);
 
-    server.on('listening', mergedConfig.onStart);
-    server.on('error', mergedConfig.onError);
+    _server.on('listening', _config.onStart);
+    _server.on('error', _config.onError);
+}
 
-    server.listen(mergedConfig.port);
+export function start() {
+    _server.listen(_config.port);
 }
