@@ -40,7 +40,7 @@
     "@jordanforeman/renovate-config": "0.2.3",
     "chai": "4.2.0",
     "chance": "1.1.4",
-    "cross-env": "5.2.1",
+    "cross-env": "7.0.2",
     "husky": "3.1.0",
     "mocha": "6.2.2",
     "nyc": "15.0.0",
