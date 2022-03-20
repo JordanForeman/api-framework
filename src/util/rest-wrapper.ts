@@ -1,8 +1,13 @@
+import Express from 'express';
 import handleError from './error-handler';
 
 const SUCCESS = 200;
 
-export default (handler) => async (request, response, next) => {
+export default (handler: Express.RequestHandler) => async (
+    request: Express.Request,
+    response: Express.Response,
+    next: Express.NextFunction
+) => {
     try {
         const data = await handler(request, response, next);
 
