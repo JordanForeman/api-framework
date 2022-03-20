@@ -46,7 +46,7 @@ This module is an opinionated wrapper around the Express framework, however cont
 Property | Description
 ------------- | -------------
 path | The API route/path
-method | the standard HTTP method to use (maps to [Express router methods](https://expressjs.com/en/4x/api.html#router.METHOD))
+method | the standard HTTP method to use (maps to [Express router methods](https://expressjs.com/en/4x/api.html#router.METHOD)). One of HTTPMethod
 config.handler | A single Express method callback with signature `(request, response, next)`
 config.middleware | (optional) the [middleware](https://expressjs.com/en/guide/using-middleware.html) (or middlewares) to use for this controller
 config.auth | (optional) the authentication strategy to use for this controller (see below)
