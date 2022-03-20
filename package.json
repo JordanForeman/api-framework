@@ -8,7 +8,7 @@
     "build": "tsc -p ./tsconfig.json",
     "coverage": "nyc --check-coverage --reporter=text npm test",
     "fixlint": "eslint .js src/ test/ --fix",
-    "lint": "eslint --ext .js src/ test/",
+    "lint": "eslint src/**/*.ts test/**/*.js",
     "test": "mocha ./test/unit/**/*.spec.js",
     "verify": "npm run lint && npm run coverage"
   },
