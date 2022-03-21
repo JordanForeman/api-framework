@@ -1,6 +1,6 @@
 {
   "name": "@jordanforeman/api-framework",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Everything you need to start creating a NodeJS based API Server",
   "main": "lib/index",
   "types": "lib/index",
