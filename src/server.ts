@@ -16,7 +16,7 @@ const DEFAULT_PORT = 8080;
 let _server: http.Server, // eslint-disable-line no-underscore-dangle
     _config: ConfigObject; // eslint-disable-line no-underscore-dangle
 
-export function setup(controllers: Array<RouteConfig>, config: ConfigObject) {
+export function setup(controllers: Array<RouteConfig>, config: ConfigObject): express.Application {
     const app = express();
 
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -38,8 +38,11 @@ export function setup(controllers: Array<RouteConfig>, config: ConfigObject) {
 
     if (config.onStart) _server.on('listening', config.onStart);
     if (config.onError) _server.on('error', config.onError);
+
+    return app;
 }
 
-export function start() {
+export function start(): http.Server {
     _server.listen(_config.port || DEFAULT_PORT);
+    return _server;
 }
