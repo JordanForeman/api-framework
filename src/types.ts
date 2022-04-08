@@ -22,6 +22,8 @@ export interface RouteConfig {
 export interface ConfigObject {
     onStart?: () => void,
     onError?: (err: Error) => void,
+    useMorgan?: boolean,
+    logFormat?: string,
     port: number,
     plugins?: Array<any>
 }

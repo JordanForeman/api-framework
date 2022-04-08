@@ -21,7 +21,10 @@ export function setup(controllers: Array<RouteConfig>, config: ConfigObject): ex
 
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json({ limit: '1024kb' }));
-    app.use(morgan('dev'));
+
+    if (config.useMorgan) {
+        app.use(morgan(config.logFormat || 'dev'));
+    }
     app.use(cors());
     app.use(helmet());
 
