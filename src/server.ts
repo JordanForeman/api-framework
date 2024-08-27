@@ -28,13 +28,13 @@ export function setup(controllers: Array<RouteConfig>, config: ConfigObject): ex
     app.use(cors());
     app.use(helmet());
 
+    controllers.forEach(route(app));
+    
     if (config.plugins) {
         config.plugins.forEach((plugin) => {
             app.use(plugin);
         });
     }
-
-    controllers.forEach(route(app));
 
     _server = http.createServer(app);
     _config = config;
