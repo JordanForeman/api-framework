@@ -37,7 +37,7 @@
     "@jordanforeman/nyc-config": "0.1.1",
     "@jordanforeman/release-config": "0.2.2",
     "@jordanforeman/renovate-config": "0.2.3",
-    "@types/cors": "2.8.12",
+    "@types/cors": "2.8.19",
     "@types/express": "4.17.13",
     "@types/morgan": "1.9.3",
     "chai": "4.2.0",
